@@ -41,6 +41,45 @@ button{cursor:pointer}.hide{display:none!important}
 .orderHub,.orderHub *{min-width:0}
 .orderHubGrid>div,.orderHubGrid>aside{min-width:0;width:100%}
 @media(max-width:700px){.customer{width:100%;max-width:430px;overflow-x:hidden}.detail,.orderHub,.trackBox,.designBox,.actionHero{max-width:100%;min-width:0}.orderHubGrid{display:block!important;width:100%!important}.orderHubGrid>div,.orderHubGrid>aside{display:block!important;width:100%!important;max-width:100%!important}.trackBox,.designBox{margin-left:0!important;margin-right:0!important;width:100%!important}.customerJourney{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:2px!important}.journeyDot{width:28px;height:28px}.journeyItem small{font-size:9px}.miniKpi{grid-template-columns:repeat(2,minmax(0,1fr))!important}.miniKpi>div:last-child{grid-column:1/-1}.specGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.designPreview img{max-width:100%;height:auto}.orderHubCode{font-size:16px;overflow-wrap:anywhere}}
+
+/* v1.1.1 — rasio desain undangan konsisten 10:21 */
+.detailGallery{display:flex;flex-direction:column;align-items:center}
+.detailPhoto{
+  width:min(100%,340px)!important;
+  height:auto!important;
+  aspect-ratio:10/21!important;
+  margin:0 auto;
+  border-radius:14px!important;
+  background:#f5f5f5!important;
+  overflow:hidden!important;
+  box-shadow:0 5px 18px rgba(16,35,55,.10)
+}
+.detailPhoto img{
+  width:100%!important;height:100%!important;
+  object-fit:contain!important;object-position:center!important;
+  display:block;background:#fff
+}
+.tryPreviewWrap{
+  width:min(100%,340px);aspect-ratio:10/21;margin:0 auto 18px;
+  position:relative;overflow:hidden;border-radius:14px;background:#f5f5f5;
+  box-shadow:0 5px 18px rgba(16,35,55,.12)
+}
+.tryPreviewWrap>img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;object-position:center;display:block;background:#fff
+}
+.tryTextLayer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:12%;pointer-events:none}
+.tryTextInner{width:78%;color:#172033;text-shadow:0 1px 2px rgba(255,255,255,.98),0 0 7px rgba(255,255,255,.92)}
+.tryTextInner small{letter-spacing:1.5px;font-weight:700;font-size:10px}
+#tryNames{font-family:Georgia,serif;font-size:clamp(22px,7vw,34px);line-height:1.12;margin:8px 0;font-weight:500}
+#tryDate{font-size:13px;font-weight:600}
+@media(max-width:640px){
+ .detailHero{padding:10px!important}
+ .detailPhoto,.tryPreviewWrap{width:min(88vw,320px)!important}
+ .detailTitle{font-size:25px!important}
+ .detailDesc{font-size:13px;line-height:1.55}
+}
+
 </style>
 <style>.loginbox{max-width:420px;margin:70px auto;background:#fff;padding:24px;border:1px solid var(--line);border-radius:14px}.loginbox input{width:100%;padding:12px;margin:7px 0;border:1px solid var(--line);border-radius:9px}.loading{padding:40px;text-align:center;color:var(--muted)}
 
@@ -258,7 +297,7 @@ let pendingCheckout=null;
 
 function tryMyName(code){
  let p=products.find(x=>x.code===code);if(!p)return;
- catalogView.innerHTML=`<div class="detail"><button class="btn ghost" onclick="productDetail('${p.code}')">← Detail Produk</button><h1>Coba Nama Saya</h1><p class="muted">Lihat gambaran cepat nama mempelai pada desain. Preview ini hanya simulasi posisi teks, bukan hasil desain final.</p><div style="max-width:520px;margin:18px auto 0"><div style="position:relative;width:min(100%,420px);aspect-ratio:10/21;margin:0 auto 20px;border-radius:16px;overflow:hidden;background:#eee;box-shadow:0 8px 28px rgba(0,0,0,.12)">${p.image?`<img src="${p.image}" alt="${safeText(p.name)}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`:`<div style="height:100%;display:grid;place-items:center">${safeText(p.name)}</div>`}<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;pointer-events:none"><div style="width:82%;text-align:center;color:#172033;text-shadow:0 1px 2px rgba(255,255,255,.95),0 0 8px rgba(255,255,255,.9)"><small style="letter-spacing:1.8px;font-weight:600">THE WEDDING OF</small><div id="tryNames" style="font-family:Georgia,serif;font-size:clamp(25px,8vw,38px);line-height:1.12;margin:8px 0;font-weight:500">Nama Anda & Pasangan</div><div id="tryDate" style="font-size:14px;font-weight:500">Tanggal Acara</div></div></div></div><div class="checkout" style="margin:0;width:100%"><label>Nama mempelai 1</label><input id="tryA" placeholder="Contoh: Ariansyah" oninput="updateTryPreview()"><label>Nama mempelai 2</label><input id="tryB" placeholder="Contoh: Wanda" oninput="updateTryPreview()"><label>Tanggal acara</label><input id="tryD" type="date" oninput="updateTryPreview()"><div class="notice">Preview ini membantu membayangkan desain sebelum memesan. Penempatan, font, ukuran, dan warna teks final akan disesuaikan oleh bagian desain.</div><button class="btn primary" style="width:100%" onclick="productDetail('${p.code}')">Pilih Produk Ini</button></div></div></div>`;
+ catalogView.innerHTML=`<div class="detail"><button class="btn ghost" onclick="productDetail('${p.code}')">← Detail Produk</button><h1>Coba Nama Saya</h1><p class="muted">Lihat gambaran cepat nama mempelai pada desain. Preview ini hanya simulasi posisi teks, bukan hasil desain final.</p><div style="max-width:520px;margin:18px auto 0"><div class="tryPreviewWrap">${p.image?`<img src="${p.image}" alt="${safeText(p.name)}">`:`<div style="height:100%;display:grid;place-items:center">${safeText(p.name)}</div>`}<div class="tryTextLayer"><div class="tryTextInner"><small>THE WEDDING OF</small><div id="tryNames">Nama Anda & Pasangan</div><div id="tryDate">Tanggal Acara</div></div></div></div><div class="checkout" style="margin:0;width:100%"><label>Nama mempelai 1</label><input id="tryA" placeholder="Contoh: Ariansyah" oninput="updateTryPreview()"><label>Nama mempelai 2</label><input id="tryB" placeholder="Contoh: Wanda" oninput="updateTryPreview()"><label>Tanggal acara</label><input id="tryD" type="date" oninput="updateTryPreview()"><div class="notice">Preview ini membantu membayangkan desain sebelum memesan. Penempatan, font, ukuran, dan warna teks final akan disesuaikan oleh bagian desain.</div><button class="btn primary" style="width:100%" onclick="productDetail('${p.code}')">Pilih Produk Ini</button></div></div></div>`;
 }
 function updateTryPreview(){
  let a=document.getElementById('tryA')?.value.trim(),b=document.getElementById('tryB')?.value.trim(),d=document.getElementById('tryD')?.value;
