@@ -117,6 +117,71 @@ button{cursor:pointer}.hide{display:none!important}
  .howGrid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 }
 </style>
+<style>
+/* HOME MOBILE FINAL STRUCTURAL OVERRIDE */
+@media (max-width:719px){
+  /* Cara Memesan: always 2 x 2 */
+  .howGrid,
+  .stepsGrid,
+  .orderSteps,
+  .homeSteps{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-auto-flow:row!important;
+    gap:10px!important;
+    width:100%!important;
+    overflow:visible!important;
+  }
+  .howGrid > *,
+  .stepsGrid > *,
+  .orderSteps > *,
+  .homeSteps > *{
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    grid-column:auto!important;
+  }
+
+  /* All home product grids: no legacy narrow horizontal cards */
+  #featuredGrid,
+  #latestGrid,
+  .featuredGrid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    width:100%!important;
+    overflow:visible!important;
+  }
+  #featuredGrid > .card,
+  #latestGrid > .card,
+  .featuredGrid > .card{
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    flex:unset!important;
+  }
+
+  /* A section containing only one product should use a useful single-card width */
+  #featuredGrid > .card:only-child,
+  #latestGrid > .card:only-child,
+  .featuredGrid > .card:only-child{
+    width:100%!important;
+  }
+  #featuredGrid:has(> .card:only-child),
+  #latestGrid:has(> .card:only-child),
+  .featuredGrid:has(> .card:only-child){
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+
+  .featuredGrid .card img,
+  #featuredGrid .card img,
+  #latestGrid .card img{
+    width:100%!important;
+    height:auto!important;
+    max-width:100%!important;
+  }
+}
+</style>
 </head><body>
 <div id="customer" class="customer"><header class="ctop"><div class="logo">LORONGSATU<b>21</b></div><button class="btn" onclick="openAdmin()">ADMIN</button></header><div id="catalogView"></div><nav><button onclick="renderHome()">⌂<small> Beranda</small></button><button onclick="renderCatalog()">▦<small> Katalog</small></button><button onclick="favoritesPage()">♡<small> Favorit</small></button><button onclick="myOrders()">▤<small> Pesanan</small></button><button onclick="openAdmin()">⚙<small> Admin</small></button></nav></div>
 <div id="admin" class="admin hide"><aside class="side"><div class="logo">LS<b>21</b><div style="font-size:11px;letter-spacing:2px;font-weight:400">UNDANGAN</div></div><div class="menu"><button id="mDash" onclick="dashboard()">⌂ Dashboard</button><button id="mProd" onclick="productsPage()">▣ Produk</button><button id="mCat" onclick="categoriesPage()">▦ Kategori</button><button id="mOrder" onclick="ordersPage()">▤ Pesanan</button><button id="mDesign" onclick="designsPage()">✦ Desain & ACC</button><button id="mPay" onclick="paymentsPage()">Rp Pembayaran</button><button id="mProdFlow" onclick="productionPage()">⚒ Produksi</button><button id="mCust" onclick="customersPage()">♙ Pelanggan</button><button id="mReport" onclick="reportsPage()">▥ Laporan</button><button id="mFinal" onclick="finalControlPage()">✓ Kontrol V1.0</button><button onclick="logoutAdmin()">⇥ Keluar</button></div></aside><main id="adminMain" class="main"></main></div>
