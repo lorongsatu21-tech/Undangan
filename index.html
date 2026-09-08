@@ -55,7 +55,25 @@ button{cursor:pointer}.hide{display:none!important}
 
 .finalGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.checkCard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}.checkLine{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}.checkLine:last-child{border-bottom:0}.okText{color:#16833f;font-weight:700}.warnText{color:#b26a00;font-weight:700}.versionTag{display:inline-block;padding:5px 9px;border-radius:999px;background:#eaf3ff;color:#0868c5;font-size:11px;font-weight:800;letter-spacing:.6px}.printOnly{display:none}@media(max-width:700px){.finalGrid{grid-template-columns:1fr}}@media print{body{background:#fff}.side,.ctop,nav,.noPrint{display:none!important}.admin{display:block!important}.main{padding:0}.panel{break-inside:avoid}.printOnly{display:block}.adminMain{display:block}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script></head><body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script><style>
+/* FINAL MOBILE ONE-COLUMN */
+@media (max-width:700px){
+ html,body{max-width:100%;overflow-x:hidden}
+ .customer,.customer main,.customer .detail,.customer .orderHub{width:100%!important;max-width:100%!important;min-width:0!important;overflow-x:hidden!important}
+ .customer .orderHubGrid,.customer .detailGrid,.customer .trackGrid,.customer .orderDetailGrid{display:flex!important;flex-direction:column!important;width:100%!important;gap:12px!important}
+ .customer .orderHubGrid>*,.customer .detailGrid>*,.customer .trackGrid>*,.customer .orderDetailGrid>*{width:100%!important;max-width:100%!important;min-width:0!important;margin-left:0!important;margin-right:0!important;grid-column:1/-1!important}
+ .customer .trackBox,.customer .designBox,.customer .panel,.customer .card,.customer .actionHero{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}
+ .customer .miniKpi{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ .customer .miniKpi>*{min-width:0!important;overflow-wrap:anywhere}
+ .customer .customerJourney{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:2px!important;width:100%!important}
+ .customer .journeyItem{min-width:0!important}.customer .journeyItem small{display:block;font-size:9px!important;line-height:1.15;overflow-wrap:anywhere}
+ .customer .designPreview,.customer .designPreview img{width:100%!important;max-width:100%!important;height:auto!important;box-sizing:border-box!important}
+ .customer .designPreview img{object-fit:contain!important}
+ .customer .money,.customer .value,.customer strong,.customer b,.customer .orderHubCode{overflow-wrap:anywhere}
+}
+@media(max-width:380px){.customer .miniKpi{grid-template-columns:1fr!important}.customer .miniKpi>*{grid-column:1/-1!important}}
+</style>
+</head><body>
 <div id="customer" class="customer"><header class="ctop"><div class="logo">LORONGSATU<b>21</b></div><button class="btn" onclick="openAdmin()">ADMIN</button></header><div id="catalogView"></div><nav><button onclick="renderHome()">⌂<small> Beranda</small></button><button onclick="renderCatalog()">▦<small> Katalog</small></button><button onclick="favoritesPage()">♡<small> Favorit</small></button><button onclick="myOrders()">▤<small> Pesanan</small></button><button onclick="openAdmin()">⚙<small> Admin</small></button></nav></div>
 <div id="admin" class="admin hide"><aside class="side"><div class="logo">LS<b>21</b><div style="font-size:11px;letter-spacing:2px;font-weight:400">UNDANGAN</div></div><div class="menu"><button id="mDash" onclick="dashboard()">⌂ Dashboard</button><button id="mProd" onclick="productsPage()">▣ Produk</button><button id="mCat" onclick="categoriesPage()">▦ Kategori</button><button id="mOrder" onclick="ordersPage()">▤ Pesanan</button><button id="mDesign" onclick="designsPage()">✦ Desain & ACC</button><button id="mPay" onclick="paymentsPage()">Rp Pembayaran</button><button id="mProdFlow" onclick="productionPage()">⚒ Produksi</button><button id="mCust" onclick="customersPage()">♙ Pelanggan</button><button id="mReport" onclick="reportsPage()">▥ Laporan</button><button id="mFinal" onclick="finalControlPage()">✓ Kontrol V1.0</button><button onclick="logoutAdmin()">⇥ Keluar</button></div></aside><main id="adminMain" class="main"></main></div>
 <script>
