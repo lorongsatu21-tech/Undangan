@@ -80,6 +80,80 @@ button{cursor:pointer}.hide{display:none!important}
  .detailDesc{font-size:13px;line-height:1.55}
 }
 
+
+/* v1.1.2 — katalog konsisten: semua artwork 10:21, card seragam */
+.grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+  padding:0 10px 18px!important;
+  align-items:stretch!important;
+}
+.cardV2{
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+  border:1px solid #dfe7ef!important;
+  border-radius:13px!important;
+  background:#fff!important;
+  box-shadow:0 2px 8px rgba(20,42,65,.06)!important;
+  position:relative!important;
+}
+.cardV2 .pic{
+  width:100%!important;
+  aspect-ratio:10/21!important;
+  height:auto!important;
+  background:#f3f5f7!important;
+  overflow:hidden!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:6px!important;
+  box-sizing:border-box!important;
+}
+.cardV2 .pic>img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  display:block!important;
+  background:#fff!important;
+  border-radius:5px!important;
+}
+.cardV2 .info{
+  padding:8px 8px 9px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  flex:1!important;
+  min-width:0!important;
+}
+.cardV2 .info>small:first-child{
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+  font-size:9px!important;
+}
+.cardV2 .info>b{
+  font-size:13px!important;line-height:1.25!important;
+  min-height:32px!important;margin:4px 0!important;
+  overflow:hidden!important;
+}
+.cardV2 .cardPrice{font-size:12px!important;line-height:1.25!important}
+.cardV2 .cardTier{font-size:9px!important;line-height:1.35!important;margin-top:3px!important}
+.cardV2 .cardMetaLine{
+  margin-top:auto!important;padding-top:7px!important;
+  display:flex!important;justify-content:space-between!important;gap:4px!important;
+  font-size:9px!important;white-space:nowrap!important;
+}
+.cardV2 .cardBadges{max-width:calc(100% - 36px)!important;display:flex!important;gap:3px!important;flex-wrap:wrap!important}
+.cardV2 .cardBadge2{font-size:8px!important;padding:3px 5px!important}
+.cardV2 .cardFav{width:29px!important;height:29px!important;top:7px!important;right:7px!important}
+@media(min-width:700px){
+ .grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important;padding:0 14px 22px!important}
+}
+@media(min-width:1000px){
+ .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+
 </style>
 <style>.loginbox{max-width:420px;margin:70px auto;background:#fff;padding:24px;border:1px solid var(--line);border-radius:14px}.loginbox input{width:100%;padding:12px;margin:7px 0;border:1px solid var(--line);border-radius:9px}.loading{padding:40px;text-align:center;color:var(--muted)}
 
@@ -259,7 +333,7 @@ function startPriceQty(p){
  return hit?hit[0]:0;
 }
 
-function card(p){let mp=minPrice(p),fav=getFavs().includes(p.code),min=Number(p.min_order||100),minUnit=unitPrice(p,min)||p.p100||mp;let badges=[];if(p.is_featured)badges.push('<span class="cardBadge2 featured">UNGGULAN</span>');if(isNewProduct(p))badges.push('<span class="cardBadge2 new">TERBARU</span>');if(!badges.length&&p.sub)badges.push(`<span class="cardBadge2">${safeText(p.sub)}</span>`);return `<article class="card cardV2"><div class="pic" onclick="productDetail('${p.code}')">${p.image?`<img src="${p.image}" alt="${safeText(p.name)}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`:safeText(p.name)}<div class="cardBadges">${badges.join('')}</div></div><button class="cardFav" aria-label="Favorit" onclick="event.stopPropagation();toggleFavFromCard('${p.code}',this)">${fav?'♥':'♡'}</button><div class="info" onclick="productDetail('${p.code}')"><small class="muted">${safeText(p.code)}${p.cat?' · '+safeText(p.cat):''}</small><b style="display:block;margin:5px 0">${safeText(p.name)}</b><span class="cardPrice">${mp?'Mulai '+rup(mp)+'/pcs':'Hubungi kami'}</span>${mp&&startPriceQty(p)?`<small class="cardTier">untuk ${startPriceQty(p).toLocaleString('id-ID')} pcs</small>`:''}${minUnit?`<small class="cardTier"><b>${min.toLocaleString('id-ID')} pcs ${rup(minUnit)}/pcs</b></small>`:''}<div class="cardMetaLine"><span>Min. ${min.toLocaleString('id-ID')} pcs</span><span>${safeText(p.size||p.model||'Lihat detail')}</span></div></div></article>`}
+function card(p){let mp=minPrice(p),fav=getFavs().includes(p.code),min=Number(p.min_order||100),minUnit=unitPrice(p,min)||p.p100||mp;let badges=[];if(p.is_featured)badges.push('<span class="cardBadge2 featured">UNGGULAN</span>');if(isNewProduct(p))badges.push('<span class="cardBadge2 new">TERBARU</span>');if(!badges.length&&p.sub)badges.push(`<span class="cardBadge2">${safeText(p.sub)}</span>`);return `<article class="card cardV2"><div class="pic" onclick="productDetail('${p.code}')">${p.image?`<img src="${p.image}" alt="${safeText(p.name)}" loading="lazy">`:safeText(p.name)}<div class="cardBadges">${badges.join('')}</div></div><button class="cardFav" aria-label="Favorit" onclick="event.stopPropagation();toggleFavFromCard('${p.code}',this)">${fav?'♥':'♡'}</button><div class="info" onclick="productDetail('${p.code}')"><small class="muted">${safeText(p.code)}${p.cat?' · '+safeText(p.cat):''}</small><b style="display:block;margin:5px 0">${safeText(p.name)}</b><span class="cardPrice">${mp?'Mulai '+rup(mp)+'/pcs':'Hubungi kami'}</span>${mp&&startPriceQty(p)?`<small class="cardTier">untuk ${startPriceQty(p).toLocaleString('id-ID')} pcs</small>`:''}${minUnit?`<small class="cardTier"><b>${min.toLocaleString('id-ID')} pcs ${rup(minUnit)}/pcs</b></small>`:''}<div class="cardMetaLine"><span>Min. ${min.toLocaleString('id-ID')} pcs</span><span>${safeText(p.size||p.model||'Lihat detail')}</span></div></div></article>`}
 function toggleFavFromCard(code,btn){let a=getFavs(),i=a.indexOf(code);if(i>=0)a.splice(i,1);else a.push(code);localStorage.setItem('ls21_favs',JSON.stringify(a));if(btn)btn.textContent=a.includes(code)?'♥':'♡'}
 function filterCatalog(q){catalogFilters.q=q;applyCatalogFilters()}
 function unitPrice(p,q){let tiers=[[100,p.p100],[300,p.p300],[500,p.p500],[1000,p.p1000]].filter(x=>Number(x[1])>0);if(!tiers.length)return 0;let price=Number(tiers[0][1]);for(let [min,v] of tiers){if(q>=min)price=Number(v);else break}return price}
