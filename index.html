@@ -383,6 +383,37 @@ function printWorkOrder(id){
   .filterRow>*,.catalogFilterRow>*{min-width:0!important;max-width:100%}
   .filterChips>*{flex:0 0 auto}
 }
+
+/* Final mobile catalog filters */
+@media (max-width:640px){
+  .chips{
+    overflow:visible!important;
+    flex-wrap:wrap!important;
+    padding:0 14px 10px!important;
+  }
+  .filterRow{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+    overflow:visible!important;
+    width:auto!important;
+    padding:0 14px 12px!important;
+  }
+  .filterRow select{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+    text-overflow:ellipsis;
+  }
+  .filterSummary{
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+}
+@media (max-width:330px){
+  .filterRow{grid-template-columns:1fr!important}
+}
 </style></head><body><div class="head"><div><h1>LORONGSATU21</h1><small>LEMBAR KERJA PRODUKSI UNDANGAN</small></div><div style="text-align:right"><b>${safeText(x.order_number)}</b><br><small>${new Date().toLocaleString('id-ID')}</small></div></div><div class="grid"><div class="box"><small>Pelanggan</small><br><b>${safeText(x.customers?.name||'-')}</b><br>${safeText(x.customers?.phone||'-')}</div><div class="box"><small>Acara / Deadline</small><br><b>${safeText(x.event_date||'-')}</b><br>${safeText(x.event_location||'-')}</div><div class="box"><small>Produk</small><br><b>${safeText(it.product_name||'-')}</b><br>${Number(it.quantity||0).toLocaleString('id-ID')} pcs</div><div class="box"><small>Status</small><br><b>${safeText(statusLabel[x.status]||x.status)}</b><br>Desain: ${safeText(d?.status||'-')}</div><div class="box"><small>Nilai Pesanan</small><br><b>${rup(x.total)}</b><br>Dibayar ${rup(paid)} · Sisa ${rup(bal)}</div><div class="box"><small>Catatan</small><br>${safeText(x.notes||'Tidak ada catatan')}</div></div><div class="steps"><div class="step">□ DESAIN</div><div class="step">□ ACC</div><div class="step">□ CETAK</div><div class="step">□ FINISHING</div><div class="step">□ QC</div><div class="step">□ LUNAS</div><div class="step">□ SIAP</div><div class="step">□ DISERAHKAN</div></div><div class="sign"><div><div class="line">Operator / QC</div></div><div><div class="line">Penerima / Pelanggan</div></div></div><p style="margin-top:35px"><small>Dicetak dari LORONGSATU21 Undangan v1.0</small></p><button onclick="window.print()">Cetak</button></body></html>`);w.document.close();setTimeout(()=>w.print(),250);
 }
 async function categoriesPage(){setMenu('mCat');await loadAdminData();adminMain.innerHTML=`<h1>Kategori</h1><div class="panel"><div class="toolbar"><input id="newCat" placeholder="Nama kategori baru"><button class="btn" onclick="addCat()">Tambah</button></div><div class="catlist">${categories.map(x=>`<span class="catitem">${x.name} <button onclick="delCat('${x.id}')">×</button></span>`).join('')}</div></div>`}
